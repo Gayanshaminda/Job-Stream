@@ -2,11 +2,15 @@ import { faBriefcase } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getSignInUrl, getUser, signOut } from "@workos-inc/authkit-nextjs";
 import Link from "next/link";
-import Jobs from "@/app/components/Jobs";
 
 export default async function Header() {
   const { user } = await getUser();
   const signInUrl = await getSignInUrl();
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
+
   return (
     <header className="-mt-4">
       <div className="container flex items-center justify-between mx-auto my-4">
@@ -45,36 +49,30 @@ export default async function Header() {
         </nav>
         
         <nav className="flex items-center gap-6 mr-28">
-        {!user && (
-          <Link
-            className="rounded-md bg-blue-600 py-1 px-2 sm:py-2 sm:px-4  text-white  transform transition-transform duration-300 hover:scale-105"
-            href={signInUrl}
-          >
-            Login
-          </Link>
-        )}
-        {user && (
-          <form
-            action={async () => {
-              "use server";
-              await signOut();
-            }}
-          >
+          {!user && (
+            <Link
+              className="rounded-md bg-blue-600 py-1 px-2 sm:py-2 sm:px-4 text-white transform transition-transform duration-300 hover:scale-105"
+              href={signInUrl}
+            >
+              Login
+            </Link>
+          )}
+          {user && (
             <button
-              type="submit"
-              className="rounded-md bg-blue-600 py-1 px-2 sm:py-2 sm:px-4  text-white  transform transition-transform duration-300 hover:scale-105"
+              type="button"
+              onClick={handleSignOut}
+              className="rounded-md bg-blue-600 py-1 px-2 sm:py-2 sm:px-4 text-white transform transition-transform duration-300 hover:scale-105"
             >
               Logout
             </button>
-          </form>
-        )}
-        <Link
-          className="flex items-center  rounded-md bg-blue-600 py-2 px-4 sm:py-2 sm:px-4 text-white transform transition-transform duration-300 hover:scale-105"
-          href={"/new-listing"}
-        >
-          <FontAwesomeIcon className="h-4 mr-2" icon={faBriefcase} />
-          Post a job
-        </Link>
+          )}
+          <Link
+            className="flex items-center rounded-md bg-blue-600 py-2 px-4 sm:py-2 sm:px-4 text-white transform transition-transform duration-300 hover:scale-105"
+            href={"/new-listing"}
+          >
+            <FontAwesomeIcon className="h-4 mr-2" icon={faBriefcase} />
+            Post a job
+          </Link>
         </nav>
       </div>
     </header>
