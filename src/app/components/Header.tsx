@@ -1,7 +1,3 @@
-
-"use server";
-
-
 import { faBriefcase } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getSignInUrl, getUser, signOut } from "@workos-inc/authkit-nextjs";
@@ -61,7 +57,7 @@ export default async function Header() {
           <form
           onSubmit={async (e) => {
             e.preventDefault(); // Prevent page reload
-            
+            "use server";
             await signOut();
           }}
         >
