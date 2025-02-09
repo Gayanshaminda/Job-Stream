@@ -34,18 +34,7 @@ export default async function NewCompanyPage() {
                 candidates.
               </p>
 
-              <form
-  onSubmit={async (e) => {
-    e.preventDefault(); // Prevents the default form submission
-    const formData = new FormData(e.currentTarget); // Collect form data
-    await handleNewCompanyFormSubmit(formData); // Call your async function
-  }}
-  className="flex mt-6"
->
-
-
-
-
+              <form action={handleNewCompanyFormSubmit} className="flex mt-6">
                 <div className="relative w-full">
                   <input
                     name="newCompanyName"

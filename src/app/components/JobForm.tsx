@@ -67,15 +67,10 @@ export default function JobForm({
           <div className="flex">
             {/* Left Side - Form */}
             <div className="flex-1 pr-4">
-            <form
-  onSubmit={async (e) => {
-    e.preventDefault(); // Prevents the default form submission
-    const formData = new FormData(e.currentTarget);
-    await handleSaveJob(formData);
-  }}
-  className="flex flex-col gap-4 ml-16"
->
-
+              <form
+                action={handleSaveJob}
+                className="flex flex-col gap-4 ml-16"
+              >
                 <div className="w-1/3 flex flex-col items-center ml-60 mt-2">
                   <h3 className=" mb-4 font-medium text-lg">Company Logo</h3>
                   <ImageUpload
