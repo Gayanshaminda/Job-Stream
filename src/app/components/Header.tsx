@@ -55,11 +55,13 @@ export default async function Header() {
         )}
         {user && (
           <form
-            action={async () => {
-              "use server";
-              await signOut();
-            }}
-          >
+          onSubmit={async (e) => {
+            e.preventDefault(); // Prevent page reload
+            "use server";
+            await signOut();
+          }}
+        >
+        
             <button
               type="submit"
               className="rounded-md bg-blue-600 py-1 px-2 sm:py-2 sm:px-4  text-white  transform transition-transform duration-300 hover:scale-105"
