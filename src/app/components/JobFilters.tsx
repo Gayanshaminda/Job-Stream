@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function JobFilters({ onFilter }: { onFilter: (filters: any) => void; }) {
+export default function JobFilters({ onFilter, className = "" }: { onFilter: (filters: any) => void; className?: string }) {
   const [minSalary, setMinSalary] = useState<number | undefined>(undefined);
   const [maxSalary, setMaxSalary] = useState<number | undefined>(undefined);
   const [jobType, setJobType] = useState<string[]>([]);
@@ -34,7 +34,7 @@ export default function JobFilters({ onFilter }: { onFilter: (filters: any) => v
   };
 
   return (
-    <div className="w-full lg:w-1/6 p-4 bg-white rounded-lg mt-4 ml-9">
+    <div className={`p-4 bg-white ${className}`}>
       <h2 className="font-bold mb-4">Filter Jobs</h2>
 
       {/* Job Type */}

@@ -3,11 +3,11 @@ import Image from "next/image";
 export default function ConnectPage() {
   return (
     <section className="bg-white py-20">
-      <div className="container mx-auto flex flex-col-reverse md:flex-row items-center">
+      <div className="w-full flex flex-col lg:flex-row items-center">
         {/* Text Section */}
-        <div className="md:w-1/2 text-center md:text-left md:pr-10 px-16">
+        <div className="w-full lg:w-1/2 text-center lg:text-left lg:pr-10 px-16">
           <h1
-            className="text-6xl font-bold mb-6  "
+            className=" text-[46px] sm:text-[54px] lg:text-6xl font-bold mb-6  "
             style={{ lineHeight: "1.2" }}
           >
             We Help You Connect With The{" "}

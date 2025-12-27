@@ -1,10 +1,10 @@
 import Header from "@/app/components/Header";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import "@radix-ui/themes/styles.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
 export const metadata: Metadata = {
   title: "Job Stream - Find Your Dream Job",
@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-white`}>
+      <body className={`${poppins.className} bg-white`}>
         <Header />
         {children}
        

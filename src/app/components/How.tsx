@@ -5,9 +5,9 @@ import {
   faBriefcase,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import "@fortawesome/fontawesome-svg-core/styles.css"; // Import the CSS
+import "@fortawesome/fontawesome-svg-core/styles.css"; 
 import { config } from "@fortawesome/fontawesome-svg-core";
-config.autoAddCss = false; // Skip adding the CSS automatically since it's already imported
+config.autoAddCss = false; 
 
 export default function HowItWorks() {
   return (

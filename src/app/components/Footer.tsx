@@ -15,9 +15,27 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#162035] text-white py-8 px-10">
-      <div className="container grid grid-cols-1 md:grid-cols-5 gap-1 mt-6">
-        <div className=" md:w-1/4" style={{ width: "100%" }}>
+    <footer className="bg-[#162035] text-white py-8 px-10 flex flex-col">
+
+      <div className="w-full flex mdlg:hidden flex-row gap-10 items-center justify-center" >
+          <h2 className="text-2xl font-bold ">JOB STREAM</h2>
+          <div className="flex space-x-4 ">
+            <a href="#" className="hover:text-gray-300">
+              <FontAwesomeIcon icon={faFacebookF} size="lg" />
+            </a>
+            <a href="#" className="hover:text-gray-300">
+              <FontAwesomeIcon icon={faInstagram} size="lg" />
+            </a>
+            <a href="#" className="hover:text-gray-300">
+              <FontAwesomeIcon icon={faLinkedinIn} size="lg" />
+            </a>
+            <a href="#" className="hover:text-gray-300">
+              <FontAwesomeIcon icon={faYoutube} size="lg" />
+            </a>
+          </div>
+        </div>
+      <div className="w-full grid grid-cols-2 mdlg:grid-cols-5 gap-5 mt-6">
+        <div className="w-full hidden mdlg:flex mdlg:flex-col  " >
           <h2 className="text-2xl font-bold mb-4">JOB STREAM</h2>
           <div className="flex space-x-4 mt-6 ml-4">
             <a href="#" className="hover:text-gray-300">

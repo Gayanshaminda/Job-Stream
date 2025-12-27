@@ -47,7 +47,7 @@ export default function JobRow({ jobDoc }: { jobDoc: Job }) {
             >
               {jobDoc.orgName || "?"}
             </Link>
-            <h3 className="text-lg font-semibold mt-1 truncate">
+            <h3 className="text-lg font-semibold mt-1">
               <Link className="hover:underline" href={"/show/" + jobDoc._id}>
                 {jobDoc.title}
               </Link>

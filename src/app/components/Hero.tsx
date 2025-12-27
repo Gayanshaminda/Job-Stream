@@ -1,18 +1,18 @@
 export default function Hero() {
   return (
-    <section className="bg-white py-10 -mt-10">
-      <div className="container mx-auto px-28  flex flex-col md:flex-row items-center text-center md:text-left">
+    <section className="bg-white py-10 lg:-mt-10">
+      <div className="w-full px-10 flex flex-col lg:flex-row items-center justify-between">
         {/* Text and Vertical Line */}
-        <div className="md:w-1/2 flex flex-col items-center md:items-start mt-8">
+        <div className="lg:w-1/2 flex flex-col items-start mt-8 relative z-20">
           <h1
-            className="text-6xl md:text-7xl font-bold text-gray-800 -mt-14  "
-            style={{ lineHeight: "1.2" }}
+            className="text-[46px] md:text-7xl font-bold text-gray-800 -mt-14  "
+            style={{ lineHeight: "1" }}
           >
             Find Your <span className="text-blue-600">Dream Job</span> Here Easy
             And Fast
           </h1>
           <p
-            className="mt-6 text-gray-500 max-w-md text-lg "
+            className="mt-6 text-gray-500 max-w- text-[16px] md:text-lg "
             style={{ lineHeight: "1.5" }}
           >
             Job Stream is a user-friendly job search site that helps you find
@@ -29,11 +29,11 @@ export default function Hero() {
         </div>
 
         {/* Image Section */}
-        <div className="md:w-1/2 mt-12 md:mt-0 flex justify-center relative">
+        <div className="lg:w-1/2 mt-12 md:mt-0 flex justify-center relative">
           <div className="absolute inset-0 flex justify-center items-center">
             <div className="circle">
               {/* Trust Badge */}
-              <div className="flex flex-col justify-center mt-4 -ml-72 mr-36">
+              <div className="hidden sm:flex flex-col justify-center mt-4 -ml-72 mr-36">
                 <div className="bg-gray-50 py-4 px-5 rounded-md text-center max-w-xs mx-auto">
                   <p className="text-gray-700 text-sm">
                     Trusted by over 1000+
