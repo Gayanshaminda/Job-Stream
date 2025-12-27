@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: "Find your dream job easily with Job Stream.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -19,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} bg-white`}>
+        {/* @ts-expect-error Async Server Component */}
         <Header />
         {children}
        
