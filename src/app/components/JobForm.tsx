@@ -68,7 +68,11 @@ export default function JobForm({
             {/* Left Side - Form */}
             <div className="flex-1 pr-4">
               <form
-                action={handleSaveJob}
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  const formData = new FormData(e.target as HTMLFormElement);
+                  await handleSaveJob(formData);
+                }}
                 className="flex flex-col gap-4 ml-16"
               >
                 <div className="w-1/3 flex flex-col items-center ml-60 mt-2">
@@ -240,7 +244,7 @@ export default function JobForm({
                   style={{ width: "705px" }}
                 />
                 <div className="flex justify-center mt-4 -ml-20">
-                  <Button size="3">
+                  <Button size="3" type="submit">
                     <span className="px-8">Save</span>
                   </Button>
                 </div>
