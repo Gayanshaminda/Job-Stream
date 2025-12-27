@@ -34,7 +34,7 @@ export default async function NewCompanyPage() {
                 candidates.
               </p>
 
-              <form action={handleNewCompanyFormSubmit} className="flex mt-6">
+              <form action={handleNewCompanyFormSubmit as unknown as string} className="flex mt-6">
                 <div className="relative w-full">
                   <input
                     name="newCompanyName"
