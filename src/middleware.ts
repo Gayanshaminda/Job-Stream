@@ -5,13 +5,13 @@ export default authkitMiddleware();
 
 export const config = {
   matcher: [
-    '/',
-    '/new-listing',
-    '/new-listing/:orgId*',
-    '/new-company',
-    '/jobs/:orgId*',
-    '/jobs/edit/:jobId*',
-    '/show/:jobId*',
-    '/favourite',
-  ]
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+  ],
 };

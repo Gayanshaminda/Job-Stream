@@ -8,17 +8,24 @@ import axios from "axios";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function JobRow({ jobDoc }: { jobDoc: Job }) {
+export default function JobRow({ jobDoc, onDelete, onToast }: { jobDoc: Job; onDelete?: (jobId: string) => void; onToast?: (message: string, type: "success" | "error") => void }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleDelete = async () => {
     setIsLoading(true);
     try {
       await axios.delete("/api/jobs?id=" + jobDoc._id);
-      alert("Job deleted successfully");
+      if (onToast) {
+        onToast("Job deleted successfully", "success");
+      }
+      if (onDelete) {
+        onDelete(jobDoc._id);
+      }
     } catch (error) {
       console.error("Error deleting job:", error);
-      alert("Failed to delete the job. Please try again.");
+      if (onToast) {
+        onToast("Failed to delete the job. Please try again.", "error");
+      }
     } finally {
       setIsLoading(false);
     }

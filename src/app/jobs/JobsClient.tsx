@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import Jobs from "@/app/components/Jobs";
 import JobFilters from "@/app/components/JobFilters";
+import Toast from "@/app/components/Toast";
 import { fetchFilteredJobs } from "../actions/searchActions";
 
 interface JobsClientProps {
@@ -19,8 +20,16 @@ export default function JobsClient({ initialJobs }: JobsClientProps) {
   const router = useRouter();
   const searchParamsHook = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
-  // Handle input change 
+  const handleDelete = (jobId: string) => {
+    setFilteredJobs(prev => prev.filter(job => job._id !== jobId));
+  };
+
+  const handleToast = (message: string, type: "success" | "error") => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3500); // Clear after toast duration + buffer
+  }; 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchQuery(value);
@@ -142,9 +151,10 @@ export default function JobsClient({ initialJobs }: JobsClientProps) {
       {/* Scrollable Job Ads Area */}
       <div className="flex-1 overflow-y-auto bg-gray-100">
         <div className="p-6">
-          <Jobs header="" jobs={filteredJobs} />
+          <Jobs header="" jobs={filteredJobs} onDelete={handleDelete} onToast={handleToast} />
         </div>
       </div>
+      {toast && <Toast message={toast.message} type={toast.type} />}
     </div>
   );
 }

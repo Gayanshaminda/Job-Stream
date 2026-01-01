@@ -1,6 +1,7 @@
 "use client";
 import { saveJobAction } from "@/app/actions/jobActions";
 import ImageUpload from "@/app/components/ImageUpload";
+import Toast from "@/app/components/Toast";
 import type { Job } from "@/models/Job";
 import {
   faBuilding,
@@ -20,7 +21,7 @@ import {
   TextField,
   Theme,
 } from "@radix-ui/themes";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import "react-country-state-city/dist/react-country-state-city.css";
 import {
@@ -45,22 +46,35 @@ export default function JobForm({
   const [stateName, setStateName] = useState(jobDoc?.state || "");
   const [cityName, setCityName] = useState(jobDoc?.city || "");
 
+  const [isSaving, setIsSaving] = useState(false);
+  const [toast, setToast] = useState<{message: string, type: 'success' | 'error'} | null>(null);
+
+  const router = useRouter();
+
   async function handleSaveJob(data: FormData) {
-    data.set("country", countryName.toString());
-    data.set("state", stateName.toString());
-    data.set("city", cityName.toString());
-    data.set("countryId", countryId.toString());
-    data.set("stateId", stateId.toString());
-    data.set("cityId", cityId.toString());
-    data.set("orgId", orgId);
-    const jobDoc = await saveJobAction(data);
-    redirect(`/jobs/${jobDoc.orgId}`);
+    setIsSaving(true);
+    try {
+      data.set("country", countryName.toString());
+      data.set("state", stateName.toString());
+      data.set("city", cityName.toString());
+      data.set("countryId", countryId.toString());
+      data.set("stateId", stateId.toString());
+      data.set("cityId", cityId.toString());
+      data.set("orgId", orgId);
+      const jobDoc = await saveJobAction(data);
+      setToast({message: 'Job saved successfully!', type: 'success'});
+      setTimeout(() => router.push(`/jobs/${jobDoc.orgId}`), 2000);
+    } catch (error) {
+      setToast({message: 'Failed to save job.', type: 'error'});
+    } finally {
+      setIsSaving(false);
+    }
   }
 
   return (
     <Theme>
       <div
-        className="min-h-screen flex items-center justify-center"
+        className="min-h-screen flex items-center justify-center font-sans"
         style={{ backgroundColor: "#6B2E91" }}
       >
         <div className="bg-white p-8 rounded-lg shadow-lg w-full mx-16 mt-10">
@@ -243,15 +257,15 @@ export default function JobForm({
                   name="description"
                   style={{ width: "705px" }}
                 />
-                <div className="flex justify-center mt-4 -ml-20">
-                  <Button size="3" type="submit">
-                    <span className="px-8">Save</span>
+                <div className="flex justify-center mt-4 -ml-20 ">
+                  <Button size="3" type="submit" style={{cursor: 'pointer', backgroundColor: '#6B2E91', opacity: isSaving ? 0.6 : 1}} disabled={isSaving}>
+                    <span className="px-8 text-white">{isSaving ? 'Saving...' : 'Save'}</span>
                   </Button>
                 </div>
               </form>
             </div>
 
-            {/* Right Side - Image Section */}
+            {/* Image Section */}
             <div className="w-1/3 bg-gray-50 flex items-center justify-center rounded-lg">
               <div className="mt-2">
                 <h3
@@ -281,6 +295,7 @@ export default function JobForm({
           </div>
         </div>
       </div>
+      {toast && <Toast message={toast.message} type={toast.type} />}
     </Theme>
   );
 }
