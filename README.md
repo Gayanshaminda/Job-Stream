@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Job Stream
 
-## Getting Started
+A full-stack recruitment platform for discovering opportunities, organizing companies, and publishing location-aware job listings.
 
-First, run the development server:
+## Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Job Stream gives candidates a searchable job board while allowing authenticated organization members to create companies and manage their own listings. The application uses Next.js server features for data operations and WorkOS for authentication and organization membership.
+
+## Features
+
+- Browse and search job listings
+- Filter opportunities by keywords and location
+- View detailed job and company information
+- WorkOS authentication and callback flow
+- Create a company organization
+- Publish, edit, and manage job listings
+- Role-aware access to company-specific actions
+- Upload company and listing media through Cloudinary
+- MongoDB persistence with a Mongoose data model
+- Responsive interface built with Radix UI and Tailwind CSS
+
+## Technology Stack
+
+| Area | Technologies |
+| --- | --- |
+| Application | Next.js 14, React, TypeScript |
+| Authentication | WorkOS AuthKit and Organizations |
+| Database | MongoDB, Mongoose |
+| Media | Cloudinary |
+| Interface | Tailwind CSS, Radix UI, Font Awesome |
+
+## Application Routes
+
+| Route | Purpose |
+| --- | --- |
+| `/` | Landing page and featured opportunities |
+| `/jobs` | Searchable job listings |
+| `/show/[jobId]` | Job details |
+| `/new-company` | Create an organization |
+| `/new-listing` | Publish a job |
+| `/jobs/edit/[jobId]` | Edit an existing listing |
+
+## Local Setup
+
+### Prerequisites
+
+- Node.js 18 or newer
+- npm
+- MongoDB database
+- WorkOS application
+- Cloudinary account for uploads
+
+### Install and configure
+
+```powershell
+npm install
+Copy-Item .env.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Fill in the WorkOS, MongoDB, and Cloudinary values in `.env.local`. Use a strong value for `WORKOS_COOKIE_PASSWORD` and keep the file outside version control.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Run locally
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```powershell
+npm run dev
+```
 
-## Learn More
+Open `http://localhost:3000`.
 
-To learn more about Next.js, take a look at the following resources:
+## Production Build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```powershell
+npm run build
+npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+For deployment, configure the same environment variables in the hosting platform and update `WORKOS_REDIRECT_URI` to the production callback URL.
 
-## Deploy on Vercel
+## Security Notes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Never commit `.env.local` or production credentials.
+- Restrict listing-management actions to authenticated organization members.
+- Validate file type and size for production uploads.
+- Use separate development and production WorkOS applications where practical.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Author
+
+Developed by [Gayan Shaminda](https://github.com/Gayanshaminda).
