@@ -30,7 +30,7 @@ export default function HowItWorks() {
 
           <svg
             className="absolute hidden md:block -mt-9"
-            width="250"
+            width="245"
             height="50"
             viewBox="0 0 100 20"
             fill="none"
